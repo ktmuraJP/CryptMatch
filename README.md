@@ -1,3 +1,3 @@
 # QueryCrypt
->>installation<<
+# installation
 $./make.sh
