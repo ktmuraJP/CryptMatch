@@ -1,1 +1,3 @@
-# CryptMatch
+# QueryCrypt
+>>installation<<
+$./make.sh
