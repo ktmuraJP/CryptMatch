@@ -3,7 +3,7 @@ An query encryption/decryption module in C, wrapped for python.
 
 ### Install
 ```
-  $./make.sh
+  $sudo ./make.sh
 ```
 ### Example
 ```
