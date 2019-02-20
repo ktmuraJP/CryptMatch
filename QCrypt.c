@@ -51,42 +51,6 @@ void filewrite(const char *filename,const char *fstring)
     fclose(fp);
 }
 
-char *strdiv(const char *input,int mode)
-{
-    char *str;
-    int odd,evn,len;
-
-    odd = 0;
-    evn = 0;
-    len = strlen(input);
-    if(len%2==0){
-        str = (char *)malloc(sizeof(char)*(strlen(input)/2));
-    
-    }else if(len%2!=0){
-        if(mode==GETODD){
-            str = (char *)malloc(sizeof(char)*((strlen(input)/2)+1));
-        }else if(mode==GETEVN){
-            str = (char *)malloc(sizeof(char)*(strlen(input)/2));
-        }
-    }
-    
-    for(int i = 0; i < len; i++){
-
-        if(mode==GETODD){
-            if(i%2!=0){
-                str[odd] = input[i];
-                odd++;
-            }
-        }else if(mode==GETEVN){
-            if(i%2==0){
-                str[evn] = input[i];
-                evn++;
-            }
-        }
-    }
-    return str;
-}
-
 void SetStringData(strdata_t *strdata)
 {
 
@@ -137,6 +101,10 @@ void SetStringData(strdata_t *strdata)
     strdata->split = str;
 }
 
+/*
+   >>query encrypt function<<
+*/
+
 char *QueryEncrypt(char *input)
 {
     int len;
@@ -146,11 +114,18 @@ char *QueryEncrypt(char *input)
     str = (char *)malloc(sizeof(char)*len);
     
     for(int i = 0; i < len; i++){
+        /*
+           decryption algorithm scope
+        */
         str[i] = ~input[i];
     }
-
     return str;
 }
+
+/*
+   >>query decrypt function<<
+*/
+
 char *QueryDecrypt(char *input)
 {
     int len;
@@ -160,43 +135,14 @@ char *QueryDecrypt(char *input)
     str = (char *)malloc(sizeof(char)*len);
 
     for(int i = 0; i < len; i++){        
+        /*
+           decryption algorithm scope
+        */
         str[i] = ~input[i];
     }
      return str;
 }
-/*
-char *EncodeJson(char *input)
-{
-    char *str,*enc,*rstr,*buff;
-    int len;
-    unsigned int ref;
-    strdata_t strdata;
 
-    strdata.string = input;
-    SetStringData(&strdata);
-    ref = 15; 
-    rstr = (char *)malloc(sizeof(char)*strdata.strlen+(strdata.lines+ref));
-    
-    for(int i = 0; i < strdata.lines; i++){
-        str = strdata.split[i];
-        len = strlen(str); 
-
-        buff = (char *)malloc(sizeof(char) * (len+ref));
-        sprintf(buff,"{\"str\":\"%s\"}",enc);
-        printf("%s\n",buff);
-        free(buff);
-
-    }
-        printf("%s\n",rstr);
-    return rstr;
-}
-
-void decode(char *input)
-{
-
-
-}
-*/
 PyObject *Qencrypt(PyObject *self, PyObject *args)
 {
     char *input, *rets;
